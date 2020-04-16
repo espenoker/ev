@@ -4,6 +4,7 @@ var postcss = require('gulp-postcss')
 var cleanCss = require('gulp-clean-css')
 var sourceMaps = require('gulp-sourcemaps')
 var concat = require("gulp-concat")
+var lost = require('lost')
 
 var webpack = require('webpack-stream')
 
@@ -21,11 +22,16 @@ gulp.task("css", function(){
     return gulp.src([
         "src/css/normalize.css",
         "src/css/typography.css",
+        "node_modules/slick-carousel/slick/slick.css",
+        "node_modules/slick-carousel/slick/slick-theme.css",
+        "src/css/hamburger.css",
         "src/css/app.css"
+        
     ])
     .pipe(sourceMaps.init())
     .pipe(
         postcss([
+            lost(),
             require("autoprefixer"),
             require("postcss-preset-env")({
                 stage: 1,
@@ -85,9 +91,9 @@ gulp.task("watch", function(){
             baseDir: "dist"
         }
     })
-    gulp.watch("src/*.html", ["html"]).on("change", browserSync.reload)
+    gulp.watch(["src/*.html", "src/components/*.html"], ["html"]).on("change", browserSync.reload)
     gulp.watch("src/js/*.js", ["js"])
-    gulp.watch("src/css/app.css", ["css"])
+    gulp.watch("src/css/*.css", ["css"])
     gulp.watch("src/fonts/*", ["fonts"])
     gulp.watch("src/img/*", ["images"])
 })
