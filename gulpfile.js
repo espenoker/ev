@@ -4,7 +4,6 @@ var postcss = require('gulp-postcss')
 var cleanCss = require('gulp-clean-css')
 var sourceMaps = require('gulp-sourcemaps')
 var concat = require("gulp-concat")
-var lost = require('lost')
 
 var webpack = require('webpack-stream')
 
@@ -16,12 +15,15 @@ var imagemin = require('gulp-imagemin')
 
 var browserSync = require('browser-sync').create()
 
+var ghpages = require('gh-pages');
+
 
 
 gulp.task("css", function(){
     return gulp.src([
         "src/css/normalize.css",
         "src/css/typography.css",
+        "node_modules/bootstrap-4-grid/css/grid.css",
         "node_modules/slick-carousel/slick/slick.css",
         "node_modules/slick-carousel/slick/slick-theme.css",
         "src/css/hamburger.css",
@@ -31,7 +33,6 @@ gulp.task("css", function(){
     .pipe(sourceMaps.init())
     .pipe(
         postcss([
-            lost(),
             require("autoprefixer"),
             require("postcss-preset-env")({
                 stage: 1,
@@ -98,5 +99,8 @@ gulp.task("watch", function(){
     gulp.watch("src/img/*", ["images"])
 })
 
+gulp.task('deploy', function() { 
+    ghpages.publish('dist', function(err) {});
+})
 
 gulp.task('default', ["html", "js", "css", "watch", "fonts", "images"]);

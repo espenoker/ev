@@ -10,13 +10,26 @@
 
 :root{
     --main-font: 'Theinhardt', sans-serif;
-
+    --titlesize: 2.8vw;
+    --subtitlesize: 2.22vw;
+    --text-size: 18px;
+}
+p{
+    line-height: 1.55;
 }
 
 h1,h2,h3,h4,h5,h6{
     font-family: var(--main-font);
     font-weight: 400;
 }
-h1{
-    font-size: 2.8vw;
+h1, h2{
+    font-size: var(--titlesize);
+}
+h3{
+    font-size: var(--subtitlesize);
+}
+h5{
+    font-size: var(--text-size);
+    line-height: 1.55;
+    margin: 1em 0;
 }

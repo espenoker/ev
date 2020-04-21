@@ -1,12 +1,4 @@
-
-const hamburgerTag = document.querySelector("button.toggle")
-
-hamburgerTag.addEventListener("click", function (event) {  
-    hamburgerTag.classList.toggle("is-active")
-})
-
-
-
+import jquery from 'jquery';
 import $ from 'jquery';
 import 'slick-carousel';
 
@@ -20,11 +12,16 @@ $(".slider-wrapper").on("afterChange", function(event, slick, currentSlide){
 $(".slider-wrapper").slick({
     arrows: false,
     dots: true,
-    dotsClass: 'slick-dots',
+    dotsClass: 'slick-dots col-12 col-md-3',
     draggable: false,
     fade: true,
-
-
-
 });
 
+const hamburgerTag = document.querySelector("div.toggle")
+const menuTag = document.querySelector(".main-nav")
+
+hamburgerTag.addEventListener("click", function (event) {  
+    
+    hamburgerTag.classList.toggle("is-active")
+    menuTag.classList.toggle("is-active")
+})
